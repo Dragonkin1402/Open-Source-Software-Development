@@ -34,7 +34,7 @@ function handleGetSubjectById($id) {
 }
 
 /**
- * Xử lý tạo sinh viên mới
+ * Xử lý tạo học phần mới
  */
 function handleCreateSubject () {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -68,7 +68,7 @@ function handleCreateSubject () {
 }
 
 /**
- * Xử lý chỉnh sửa sinh viên
+ * Xử lý chỉnh sửa học phần
  */
 function handleEditSubject() {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

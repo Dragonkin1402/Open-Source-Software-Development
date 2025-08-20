@@ -48,7 +48,7 @@ $currentUser = getCurrentUser();
                         <a class="nav-link" href="subject.php">Quản lý học phần</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quản lý điểm</a>
+                        <a class="nav-link" href="grade.php">Quản lý điểm</a>
                     </li>
                 </ul>
                 <!-- Left links -->
