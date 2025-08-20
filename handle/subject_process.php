@@ -1,6 +1,6 @@
 <?php
 // session_start();
-require_once '../functions/subject_functions.php';
+require_once __DIR__ . '/../functions/subject_functions.php';
 
 // Kiểm tra action được truyền qua URL hoặc POST
 $action = '';
@@ -12,17 +12,25 @@ if (isset($_GET['action'])) {
 
 switch ($action) {
     case 'create':
-        handleCreateStudent();
+        handleCreateSubject();
         break;
     case 'edit':
-        handleEditStudent();
+        handleEditSubject();
         break;
     case 'delete':
-        handleDeleteStudent();
+        handleDeleteSubject();
         break;
-    default:
-        header("Location: ../views/subject.php?error=Hành động không hợp lệ");
-        exit();
+    // default:
+    //     header("Location: ../views/subject.php?error=Hành động không hợp lệ");
+    //     exit();
+}
+
+function handleGetAllSubjects() {
+    return getAllSubjects();
+    // Xử lý hiển thị danh sách subjects
+}
+function handleGetSubjectById($id) {
+    return getSubjectById($id);
 }
 
 /**
@@ -62,49 +70,49 @@ function handleCreateSubject () {
 /**
  * Xử lý chỉnh sửa sinh viên
  */
-function handleEditStudent() {
+function handleEditSubject() {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: ../views/student.php?error=Phương thức không hợp lệ");
+        header("Location: ../views/subject.php?error=Phương thức không hợp lệ");
         exit();
     }
     
-    if (!isset($_POST['id']) || !isset($_POST['student_code']) || !isset($_POST['student_name'])) {
-        header("Location: ../views/student.php?error=Thiếu thông tin cần thiết");
+    if (!isset($_POST['id']) || !isset($_POST['subject_code']) || !isset($_POST['subject_name'])) {
+        header("Location: ../views/subject.php?error=Thiếu thông tin cần thiết");
         exit();
     }
     
     $id = $_POST['id'];
-    $student_code = trim($_POST['student_code']);
-    $student_name = trim($_POST['student_name']);
+    $subject_code = trim($_POST['subject_code']);
+    $subject_name = trim($_POST['subject_name']);
     
     // Validate dữ liệu
-    if (empty($student_code) || empty($student_name)) {
-        header("Location: ../views/edit_student.php?id=" . $id . "&error=Vui lòng điền đầy đủ thông tin");
+    if (empty($subject_code) || empty($subject_name)) {
+        header("Location: ../views/edit_subject.php?id=" . $id . "&error=Vui lòng điền đầy đủ thông tin");
         exit();
     }
-    
-    // Gọi function để cập nhật sinh viên
-    $result = updateStudent($id, $student_code, $student_name);
+
+    // Gọi function để cập nhật học phần
+    $result = updateSubject($id, $subject_code, $subject_name);
     
     if ($result) {
-        header("Location: ../views/student.php?success=Cập nhật sinh viên thành công");
+        header("Location: ../views/subject.php?success=Cập nhật học phần thành công");
     } else {
-        header("Location: ../views/edit_student.php?id=" . $id . "&error=Cập nhật sinh viên thất bại");
+        header("Location: ../views/edit_subject.php?id=" . $id . "&error=Cập nhật học phần thất bại");
     }
     exit();
 }
 
 /**
- * Xử lý xóa sinh viên
+ * Xử lý xóa học phần
  */
-function handleDeleteStudent() {
+function handleDeleteSubject() {
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-        header("Location: ../views/student.php?error=Phương thức không hợp lệ");
+        header("Location: ../views/subject.php?error=Phương thức không hợp lệ");
         exit();
     }
     
     if (!isset($_GET['id']) || empty($_GET['id'])) {
-        header("Location: ../views/student.php?error=Không tìm thấy ID sinh viên");
+        header("Location: ../views/subject.php?error=Không tìm thấy ID học phần");
         exit();
     }
     
@@ -112,17 +120,17 @@ function handleDeleteStudent() {
     
     // Validate ID là số
     if (!is_numeric($id)) {
-        header("Location: ../views/student.php?error=ID sinh viên không hợp lệ");
+        header("Location: ../views/subject.php?error=ID học phần không hợp lệ");
         exit();
     }
     
-    // Gọi function để xóa sinh viên
-    $result = deleteStudent($id);
-    
+    // Gọi function để xóa học phần
+    $result = deleteSubject($id);
+
     if ($result) {
-        header("Location: ../views/student.php?success=Xóa sinh viên thành công");
+        header("Location: ../views/subject.php?success=Xóa học phần thành công");
     } else {
-        header("Location: ../views/student.php?error=Xóa sinh viên thất bại");
+        header("Location: ../views/subject.php?error=Xóa học phần thất bại");
     }
     exit();
 }

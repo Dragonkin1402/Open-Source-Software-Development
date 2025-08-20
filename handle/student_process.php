@@ -1,6 +1,6 @@
 <?php
 // session_start();
-require_once '../functions/student_functions.php';
+require_once __DIR__ . '/../functions/student_functions.php';
 
 // Kiểm tra action được truyền qua URL hoặc POST
 $action = '';
@@ -29,6 +29,10 @@ switch ($action) {
  */
 function handleGetAllStudents() {
     return getAllStudents();
+}
+
+function handleGetStudentById($id) {
+    return getStudentById($id);
 }
 
 /**

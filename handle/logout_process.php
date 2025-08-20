@@ -1,6 +1,6 @@
 <?php
-require_once '../functions/auth.php';
+require_once __DIR__ . '/../functions/auth.php';
 
 // Sử dụng hàm logout chung
-logout('../index.php');
+logout(__DIR__ . '/../index.php');
 ?>

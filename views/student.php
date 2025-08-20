@@ -1,6 +1,6 @@
 <?php
-require_once '../functions/auth.php';
-checkLogin('../index.php');
+require_once __DIR__ . '/../functions/auth.php';
+checkLogin(__DIR__ . '/../index.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,6 +33,16 @@ checkLogin('../index.php');
             </div>';
         }
         ?>
+        <script>
+        // Sau 3 giây sẽ tự động ẩn alert
+        setTimeout(() => {
+            let alertNode = document.querySelector('.alert');
+            if (alertNode) {
+                let bsAlert = bootstrap.Alert.getOrCreateInstance(alertNode);
+                bsAlert.close();
+            }
+        }, 3000);
+        </script>
         
         <a href="student/create_student.php" class="btn btn-primary mb-3">Create</a>
         <table class="table table-bordered">

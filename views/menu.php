@@ -1,6 +1,7 @@
 <?php
-require_once '../functions/auth.php';
-checkLogin('../index.php');
+// Sử dụng __DIR__ để tính toán đường dẫn chính xác từ vị trí file hiện tại
+require_once __DIR__ . '/../functions/auth.php';
+checkLogin(__DIR__ . '/../index.php');
 $currentUser = getCurrentUser();
 ?>
 <!DOCTYPE html>

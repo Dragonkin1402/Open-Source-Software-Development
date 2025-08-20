@@ -1,6 +1,6 @@
 <?php
-require_once '../../functions/auth.php';
-checkLogin('../../index.php');
+require_once __DIR__ . '/../../functions/auth.php';
+checkLogin(__DIR__ . '/../../index.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,8 +25,18 @@ checkLogin('../../index.php');
                     </div>';
                 }
                 ?>
+                <script>
+                // Sau 3 giây sẽ tự động ẩn alert
+                setTimeout(() => {
+                    let alertNode = document.querySelector('.alert');
+                    if (alertNode) {
+                        let bsAlert = bootstrap.Alert.getOrCreateInstance(alertNode);
+                        bsAlert.close();
+                    }
+                }, 3000);
+                </script>
                 
-                <form action="../../handle/student_process.php" method="POST">
+                <form action="../../handle/subject_process.php" method="POST">
                     <input type="hidden" name="action" value="create">
                     <div class="mb-3">
                         <label for="subject_code" class="form-label">Mã học phần</label>

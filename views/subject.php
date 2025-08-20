@@ -1,6 +1,6 @@
 <?php
-require_once '../functions/auth.php';
-checkLogin('../index.php');
+require_once __DIR__ . '/../functions/auth.php';
+checkLogin(__DIR__ . '/../index.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,38 +33,48 @@ checkLogin('../index.php');
             </div>';
         }
         ?>
+        <script>
+        // Sau 3 giây sẽ tự động ẩn alert
+        setTimeout(() => {
+            let alertNode = document.querySelector('.alert');
+            if (alertNode) {
+                let bsAlert = bootstrap.Alert.getOrCreateInstance(alertNode);
+                bsAlert.close();
+            }
+        }, 3000);
+        </script>
 
-        <a href="student/create_student.php" class="btn btn-primary mb-3">Create</a>
+        <a href="subject/create_subject.php" class="btn btn-primary mb-3">Create</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <!-- <th scope="col">STT</th> -->
                     <th scope="col">ID</th>
-                    <th scope="col">Mã sinh viên</th>
-                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Mã học phần</th>
+                    <th scope="col">Tên học phần</th>
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 require_once '../functions/subject_functions.php';
-                $students = getAllStudents();
+                $subjects = getAllSubjects();
 
-                foreach($students as $index => $stu){
+                foreach($subjects as $index => $sub){
                     $stt = $index + 1;
             ?>
                 <tr>
-                    <td><?= $stu["id"] ?></td>
-                    <td><?= $stu["student_code"] ?></td>
-                    <td><?= $stu["student_name"] ?></td>
+                    <td><?= $sub["id"] ?></td>
+                    <td><?= $sub["subject_code"] ?></td>
+                    <td><?= $sub["subject_name"] ?></td>
                     <td>
-                        <a href="student/edit_student.php?id=<?= $stu["id"] ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="../handle/student_process.php?action=delete&id=<?= $stu["id"] ?>"
+                        <a href="subject/edit_subject.php?id=<?= $sub["id"] ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="../handle/subject_process.php?action=delete&id=<?= $sub["id"] ?>"
                             class="btn btn-danger btn-sm"
-                            onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">Delete</a>
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa học phần này?')">Delete</a>
                     </td>
                 </tr>
-            <?php } ?>
+                <?php } ?>
 
             </tbody>
         </table>

@@ -2,7 +2,7 @@
 require_once 'db_connection.php';
 
 /**
- * Lấy tất cả danh sách students từ database
+ * Lấy tất cả danh sách subjects từ database
  * @return array Danh sách subjects
  */
 function getAllSubjects() {
@@ -25,19 +25,19 @@ function getAllSubjects() {
 }
 
 /**
- * Thêm student mới
- * @param string $student_code Mã sinh viên
- * @param string $student_name Tên sinh viên
+ * Thêm subject mới
+ * @param string $subject_code Mã học phần
+ * @param string $subject_name Tên học phần
  * @return bool True nếu thành công, False nếu thất bại
  */
-function addStudent($student_code, $student_name) {
+function addSubject($subject_code, $subject_name) {
     $conn = getDbConnection();
-    
-    $sql = "INSERT INTO students (student_code, student_name) VALUES (?, ?)";
+
+    $sql = "INSERT INTO subjects (subject_code, subject_name) VALUES (?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ss", $student_code, $student_name);
+        mysqli_stmt_bind_param($stmt, "ss", $subject_code, $subject_name);
         $success = mysqli_stmt_execute($stmt);
         
         mysqli_stmt_close($stmt);
@@ -50,14 +50,14 @@ function addStudent($student_code, $student_name) {
 }
 
 /**
- * Lấy thông tin một student theo ID
- * @param int $id ID của student
- * @return array|null Thông tin student hoặc null nếu không tìm thấy
+ * Lấy thông tin một subject theo ID
+ * @param int $id ID của subject
+ * @return array|null Thông tin subject hoặc null nếu không tìm thấy
  */
-function getStudentById($id) {
+function getSubjectById($id) {
     $conn = getDbConnection();
-    
-    $sql = "SELECT id, student_code, student_name FROM students WHERE id = ? LIMIT 1";
+
+    $sql = "SELECT id, subject_code, subject_name FROM subjects WHERE id = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $sql);
     
     if ($stmt) {
@@ -66,10 +66,10 @@ function getStudentById($id) {
         $result = mysqli_stmt_get_result($stmt);
         
         if (mysqli_num_rows($result) > 0) {
-            $student = mysqli_fetch_assoc($result);
+            $subject = mysqli_fetch_assoc($result);
             mysqli_stmt_close($stmt);
             mysqli_close($conn);
-            return $student;
+            return $subject;
         }
         
         mysqli_stmt_close($stmt);
@@ -80,20 +80,20 @@ function getStudentById($id) {
 }
 
 /**
- * Cập nhật thông tin student
- * @param int $id ID của student
- * @param string $student_code Mã sinh viên mới
- * @param string $student_name Tên sinh viên mới
+ * Cập nhật thông tin subject
+ * @param int $id ID của subject
+ * @param string $subject_code Mã học phần mới
+ * @param string $subject_name Tên học phần mới
  * @return bool True nếu thành công, False nếu thất bại
  */
-function updateStudent($id, $student_code, $student_name) {
+function updateSubject($id, $subject_code, $subject_name) {
     $conn = getDbConnection();
     
-    $sql = "UPDATE students SET student_code = ?, student_name = ? WHERE id = ?";
+    $sql = "UPDATE subjects SET subject_code = ?, subject_name = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ssi", $student_code, $student_name, $id);
+        mysqli_stmt_bind_param($stmt, "ssi", $subject_code, $subject_name, $id);
         $success = mysqli_stmt_execute($stmt);
         
         mysqli_stmt_close($stmt);
@@ -106,14 +106,14 @@ function updateStudent($id, $student_code, $student_name) {
 }
 
 /**
- * Xóa student theo ID
- * @param int $id ID của student cần xóa
+ * Xóa subject theo ID
+ * @param int $id ID của subject cần xóa
  * @return bool True nếu thành công, False nếu thất bại
  */
-function deleteStudent($id) {
+function deleteSubject($id) {
     $conn = getDbConnection();
     
-    $sql = "DELETE FROM students WHERE id = ?";
+    $sql = "DELETE FROM subjects WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     
     if ($stmt) {
