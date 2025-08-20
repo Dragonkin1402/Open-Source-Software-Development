@@ -3,25 +3,25 @@ require_once 'db_connection.php';
 
 /**
  * Lấy tất cả danh sách students từ database
- * @return array Danh sách students
+ * @return array Danh sách subjects
  */
-function getAllStudents() {
+function getAllSubjects() {
     $conn = getDbConnection();
     
-    // Truy vấn lấy tất cả students
-    $sql = "SELECT id, student_code, student_name FROM students ORDER BY id";
+    // Truy vấn lấy tất cả subjects
+    $sql = "SELECT id, subject_code, subject_name FROM subjects ORDER BY id";
     $result = mysqli_query($conn, $sql);
-    
-    $students = [];
+
+    $subjects = [];
     if ($result && mysqli_num_rows($result) > 0) {
         // Lặp qua từng dòng trong kết quả truy vấn $result
         while ($row = mysqli_fetch_assoc($result)) { 
-            $students[] = $row; // Thêm mảng $row vào cuối mảng $students
+            $subjects[] = $row; // Thêm mảng $row vào cuối mảng $subjects
         }
     }
     
     mysqli_close($conn);
-    return $students;
+    return $subjects;
 }
 
 /**

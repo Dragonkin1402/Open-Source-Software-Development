@@ -1,6 +1,6 @@
 <?php
 // session_start();
-require_once '../functions/student_functions.php';
+require_once '../functions/subject_functions.php';
 
 // Kiểm tra action được truyền qua URL hoặc POST
 $action = '';
@@ -20,47 +20,41 @@ switch ($action) {
     case 'delete':
         handleDeleteStudent();
         break;
-    // default:
-    //     header("Location: ../views/student.php?error=Hành động không hợp lệ");
-    //     exit();
-}
-/**
- * Lấy tất cả danh sách sinh viên
- */
-function handleGetAllStudents() {
-    return getAllStudents();
+    default:
+        header("Location: ../views/subject.php?error=Hành động không hợp lệ");
+        exit();
 }
 
 /**
  * Xử lý tạo sinh viên mới
  */
-function handleCreateStudent() {
+function handleCreateSubject () {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: ../views/student.php?error=Phương thức không hợp lệ");
+        header("Location: ../views/subject.php?error=Phương thức không hợp lệ");
         exit();
     }
     
-    if (!isset($_POST['student_code']) || !isset($_POST['student_name'])) {
-        header("Location: ../views/student/create_student.php?error=Thiếu thông tin cần thiết");
+    if (!isset($_POST['subject_code']) || !isset($_POST['subject_name'])) {
+        header("Location: ../views/subject/create_subject.php?error=Thiếu thông tin cần thiết");
         exit();
     }
     
-    $student_code = trim($_POST['student_code']);
-    $student_name = trim($_POST['student_name']);
+    $subject_code = trim($_POST['subject_code']);
+    $subject_name = trim($_POST['subject_name']);
     
     // Validate dữ liệu
-    if (empty($student_code) || empty($student_name)) {
-        header("Location: ../views/student/create_student.php?error=Vui lòng điền đầy đủ thông tin");
+    if (empty($subject_code) || empty($subject_name)) {
+        header("Location: ../views/subject/create_subject.php?error=Vui lòng điền đầy đủ thông tin");
         exit();
     }
-    
-    // Gọi hàm thêm sinh viên
-    $result = addStudent($student_code, $student_name);
-    
+
+    // Gọi hàm thêm học phần
+    $result = addSubject($subject_code, $subject_name);
+
     if ($result) {
-        header("Location: ../views/student.php?success=Thêm sinh viên thành công");
+        header("Location: ../views/subject.php?success=Thêm học phần thành công");
     } else {
-        header("Location: ../views/student/create_student.php?error=Có lỗi xảy ra khi thêm sinh viên");
+        header("Location: ../views/subject/create_subject.php?error=Có lỗi xảy ra khi thêm học phần");
     }
     exit();
 }

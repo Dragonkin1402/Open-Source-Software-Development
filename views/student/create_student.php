@@ -1,3 +1,7 @@
+<?php
+require_once '../../functions/auth.php';
+checkLogin('../../index.php');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +26,8 @@
                 }
                 ?>
                 
-                <form action="handle/student_process.php" method="POST">
+                <form action="../../handle/student_process.php" method="POST">
+                    <input type="hidden" name="action" value="create">
                     <div class="mb-3">
                         <label for="student_code" class="form-label">Mã sinh viên</label>
                         <input type="text" class="form-control" id="student_code" name="student_code" required>
@@ -35,7 +40,7 @@
                     
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary">Thêm sinh viên</button>
-                        <a href="home.php" class="btn btn-secondary">Hủy</a>
+                        <a href="../student.php" class="btn btn-secondary">Hủy</a>
                     </div>
                 </form>
             </div>
