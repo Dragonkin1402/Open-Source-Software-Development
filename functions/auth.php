@@ -80,4 +80,32 @@ function isLoggedIn() {
     
     return isset($_SESSION['user_id']) && isset($_SESSION['username']);
 }
+
+/**
+ * Hàm xác thực đăng nhập
+ * @param mysqli $conn
+ * @param string $username
+ * @param string $password
+ * @return array|false Trả về thông tin user nếu đúng, false nếu sai
+ */
+function authenticateUser($conn, $username, $password) {
+    $sql = "SELECT id, username, password, role FROM users WHERE username = ? LIMIT 1";
+    $stmt = mysqli_prepare($conn, $sql);
+    if (!$stmt) return false;
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+        if ($password === $user['password']) { // Nên dùng password_verify nếu có mã hóa
+            mysqli_stmt_close($stmt);
+            return $user;
+        }
+    }
+    if ($stmt) mysqli_stmt_close($stmt);
+    return false;
+}
+
 ?>
+
+
