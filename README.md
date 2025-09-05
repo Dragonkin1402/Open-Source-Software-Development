@@ -20,7 +20,9 @@
 </div>
 
 ## 📖 1. Giới thiệu
-Platform ERP được áp dụng vào học phần Thực tập doanh nghiệp dựa trên mã nguồn mở Odoo. 
+Chào mừng bạn đến với nền tảng ERP được áp dụng vào học phần Thực tập doanh nghiệp, dựa trên mã nguồn mở Odoo. Hệ thống này được thiết kế để hỗ trợ quản lý các hoạt động kinh doanh liên quan đến homestay.
+
+Nền tảng này cho phép bạn quản lý chi tiết về homestay, bao gồm thông tin về tên homestay, mô tả, địa điểm, giá cả, và chủ sở hữu. Bên cạnh đó, hệ thống còn hỗ trợ quản lý người dùng (bao gồm cả chủ sở hữu và quản trị viên), đặt phòng, và thanh toán, tạo ra một giải pháp toàn diện cho việc vận hành homestay của bạn 
 
 ## 🔧 2. Các công nghệ được sử dụng
 <div align="center">
@@ -39,9 +41,7 @@ Platform ERP được áp dụng vào học phần Thực tập doanh nghiệp d
 
 ## 🚀 3. Các project đã thực hiện dựa trên Platform
 
-Một số project sinh viên đã thực hiện:
-- #### [Khoá 15](./docs/projects/K15/README.md)
-- #### [Khoá 16]() (Coming soon)
+
 ## ⚙️ 4. Cài đặt
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
